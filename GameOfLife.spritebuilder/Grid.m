@@ -7,6 +7,7 @@
 //
 
 #import "Grid.h"
+#import "Creature.h"
 
 //these are variables that cannot be changed
 static const int GRID_ROWS = 8;
@@ -17,17 +18,17 @@ static const int GRID_COLUMNS = 10;
     NSMutableArray *_gridArray; //2D array that will store all the creatures in our grid
     float _cellWidth;
     float _cellHeight;
-    
-- (void)onEnter
-    {
+}
+- (void)onEnter {
         [super onEnter];
+        
         [self setupGrid];
         
-        //accept touched on the grid
+        // accept touches on the grid
         self.userInteractionEnabled = YES;
-    }
--(void)setUpGrid
-    {
+}
+
+-(void)setupGrid {
         //divide the grid's size by the number of columns/rows to figure out the right height and width of each cell
         _cellWidth = self.contentSize.width / GRID_COLUMNS;
         _cellHeight = self.contentSize.height  / GRID_ROWS;
@@ -46,7 +47,7 @@ static const int GRID_COLUMNS = 10;
             for(int j=0; j < GRID_COLUMNS; j++) {
                 Creature *creature =[[Creature alloc] initCreature];
                 creature.anchorPoint = ccp(0,0);
-                creature.position = cpp(x, y);
+                creature.position = ccp(x, y);
                 [self addChild:creature]; //creature is a child of grid node
                 
                 //this is shorthand to access an array inside an array
@@ -58,11 +59,9 @@ static const int GRID_COLUMNS = 10;
                 x+=_cellWidth;//update the x-coord for the next creature
             }
                 y+=_cellHeight;
-            
-            
         }
     }
-}
+
 
 
 

@@ -13,5 +13,5 @@
 //will be used to store current game stats that will be displayed in the game
 @property (nonatomic, assign) int totalAlive;
 @property (nonatomic, assign) int generation;
-
+-(void)onEnter;
 @end
