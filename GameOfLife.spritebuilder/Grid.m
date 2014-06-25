@@ -19,6 +19,7 @@ static const int GRID_COLUMNS = 10;
     float _cellWidth;
     float _cellHeight;
 }
+    //invoked when the Grid class gets loaded
 - (void)onEnter {
         [super onEnter];
         
@@ -53,15 +54,31 @@ static const int GRID_COLUMNS = 10;
                 //this is shorthand to access an array inside an array
                 _gridArray[i][j] = creature;
                 
-                //make creatures visible to test this method,
-                creature.isAlive = YES;
-                
                 x+=_cellWidth;//update the x-coord for the next creature
             }
                 y+=_cellHeight;
         }
     }
+//called auto when the user touches the screen because this class inherits CCNode
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event //NEEEEEEEEEEEEEEEEED TO LOOK OVER AGAIN!
+{
+    //get the x, y coordinates of the touch
+    CGPoint touchLocation = [touch locationInNode:self];
+    
+    //get the creature at that location
+    Creature *creature = [self creatureForTouchPosition:&touchLocation];
+    
+    //invert it's state. Kill it if it's alive, or revive if it's dead
+    creature.isAlive = !creature.isAlive;
+}
 
+-(Creature *)creatureForTouchPosition:(CGPoint *)touchPosition
+{
+    //get the row and column that was touched
+    int column = touchPosition->x / _cellWidth;
+    int row = touchPosition->y / _cellHeight;
+    return _gridArray[row][column];
+}
 
 
 

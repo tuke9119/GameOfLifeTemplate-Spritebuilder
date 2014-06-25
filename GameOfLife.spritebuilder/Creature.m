@@ -20,7 +20,7 @@
     }
     return self;
 }
-
+//this method is auto called when you access its corresponding property isAlive
 -(void)setIsAlive:(BOOL)newState// private void setIsAlive(BOOL newState)
 {
     _isAlive = newState;
