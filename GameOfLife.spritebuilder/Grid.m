@@ -96,7 +96,7 @@ static const int GRID_COLUMNS = 10;
             
             for(int x = (i-1); x <=(i+1); x++)
             {
-                for(int y = (j-1); y<=(j+1); y++)
+                for(int y = (j-1); y <= (j+1); y++)
                 {
                     if([self isIndexValid:x andY:y] || ((x == i) && (y == j)))
                     {
@@ -132,12 +132,12 @@ static const int GRID_COLUMNS = 10;
             Creature *currentCreature = _gridArray[i][j];
             if((currentCreature.livingNeighbors <= 1) || (currentCreature.livingNeighbors >=4)) //the creature dies
             {
-                currentCreature.isAlive = NO;
+                currentCreature.isAlive = FALSE;
                 
             }
             else if((currentCreature.livingNeighbors == 3) && (!currentCreature.isAlive)) // the creature revives
             {
-                currentCreature.isAlive = YES;
+                currentCreature.isAlive = TRUE;
                 
             }
            /* if(currentCreature.isAlive)
