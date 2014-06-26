@@ -79,7 +79,72 @@ static const int GRID_COLUMNS = 10;
     int row = touchPosition->y / _cellHeight;
     return _gridArray[row][column];
 }
-
-
+-(void)evolveStep
+{
+    [self countNeighbors]; //update each creature's neighbor count
+    [self updateCreatures];//update each creature's state
+    _generation++;//update generation
+}
+-(void)countNeighbors
+{
+    for(int i=0; i < [_gridArray count]; i++) //iterates through the rows
+    {
+        for( int j=0; j< [_gridArray[i] count]; j++) //iterates through the columns for a given row
+        {
+            Creature *currentCreature = _gridArray[i][j]; //obtains the creature in the current cell
+            currentCreature.livingNeighbors = 0;
+            
+            for(int x = (i-1); x <=(i+1); x++)
+            {
+                for(int y = (j-1); j<=(j+1); j++)
+                {
+                    if([self isIndexValid:x andY:y] || (x == i && y == j))
+                    {
+                        Creature *neighborCreature = _gridArray[x][y];
+                        if(neighborCreature.isAlive)
+                            currentCreature.livingNeighbors++;
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+}
+-(BOOL)isIndexValid:(int)x andY:(int)y
+{
+    BOOL isIndexValid = YES;
+    if(x < GRID_COLUMNS || x > GRID_COLUMNS || y < GRID_ROWS || y > GRID_ROWS)
+    {
+        isIndexValid = NO;
+    }
+    return isIndexValid;
+}
+-(void)updateCreatures
+{
+    int numAlive = 0;
+    for(int i = 0; i < [_gridArray count]; i++)
+    {
+        for(int j=0; j < [_gridArray[i] count]; j++)
+        {
+            Creature *currentCreature = _gridArray[i][j];
+            if(currentCreature.isAlive)
+            {
+                numAlive++;
+            }
+            if(currentCreature.livingNeighbors <= 1 || currentCreature.livingNeighbors >=4) //the creature dies
+            {
+                currentCreature.isAlive = NO;
+                
+            }
+            else if(currentCreature.livingNeighbors == 3 && (!currentCreature.isAlive)) // the creature revives
+            {
+                currentCreature.isAlive = YES;
+                
+            }
+        }
+    }
+    _totalAlive = numAlive;
+}
 
 @end
