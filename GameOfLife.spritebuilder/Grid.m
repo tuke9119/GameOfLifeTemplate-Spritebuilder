@@ -135,7 +135,7 @@ static const int GRID_COLUMNS = 10;
                 currentCreature.isAlive = FALSE;
                 
             }
-            else if((currentCreature.livingNeighbors == 3) && (!currentCreature.isAlive)) // the creature revives
+            else if(currentCreature.livingNeighbors == 3) // the creature revives
             {
                 currentCreature.isAlive = TRUE;
                 
