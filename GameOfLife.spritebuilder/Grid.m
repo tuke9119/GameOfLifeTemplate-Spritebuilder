@@ -106,8 +106,6 @@ static const int GRID_COLUMNS = 10;
                             currentCreature.livingNeighbors+=1;
                         }
                     }
-                    
-                    
                 }
             }
         }
@@ -116,7 +114,7 @@ static const int GRID_COLUMNS = 10;
 -(BOOL)isIndexValid:(int)x andY:(int)y
 {
     BOOL isIndexValid = YES;
-    if(x < GRID_COLUMNS || x > GRID_COLUMNS || y < GRID_ROWS || y > GRID_ROWS)
+    if(x < 0 || x > GRID_COLUMNS || y < 0 || y > GRID_ROWS)
     {
         isIndexValid = NO;
     }
