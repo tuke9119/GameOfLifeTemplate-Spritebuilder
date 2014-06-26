@@ -96,7 +96,7 @@ static const int GRID_COLUMNS = 10;
             
             for(int x = (i-1); x <=(i+1); x++)
             {
-                for(int y = (j-1); j<=(j+1); j++)
+                for(int y = (j-1); y<=(j+1); y++)
                 {
                     if([self isIndexValid:x andY:y] || ((x == i) && (y == j)))
                     {
