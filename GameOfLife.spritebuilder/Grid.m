@@ -83,6 +83,7 @@ static const int GRID_COLUMNS = 10;
 {
     [self countNeighbors]; //update each creature's neighbor count
     [self updateCreatures];//update each creature's state
+    self.generation +=1;
 }
 -(void)countNeighbors
 {
