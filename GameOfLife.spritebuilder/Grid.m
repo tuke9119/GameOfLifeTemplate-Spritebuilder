@@ -98,7 +98,7 @@ static const int GRID_COLUMNS = 10;
             {
                 for(int y = (j-1); y <= (j+1); y++)
                 {
-                    if([self isIndexValid:x andY:y] || !((x == i) && (y == j)))
+                    if([self isIndexValid:x andY:y] && !((x == i) && (y == j)))
                     {
                         Creature *neighborCreature = _gridArray[x][y];
                         if(neighborCreature.isAlive)
